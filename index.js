@@ -2,22 +2,22 @@ const express = require('express');
 const { Client, GatewayIntentBits } = require('discord.js');
 require('dotenv').config();
 
+// Set up Express to make the bot a web service
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Respond to HTTP requests with a simple message to keep Render happy
 app.get('/', (req, res) => {
-  res.send('Discord bot is running!');
+  res.send('Discord bot is running and deployed on Render!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Express server running on port ${PORT}`);
-});
-
+// Set up the Discord bot
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
-  
+
+  // Update channel name every 60 seconds
   setInterval(async () => {
     try {
       const channel = await client.channels.fetch(process.env.CHANNEL_ID);
@@ -31,3 +31,8 @@ client.once('ready', () => {
 });
 
 client.login(process.env.DISCORD_TOKEN);
+
+// Start the Express web server
+app.listen(PORT, () => {
+  console.log(`Express server running on port ${PORT}`);
+});
