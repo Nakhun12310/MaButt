@@ -17,10 +17,17 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}`);
 
+  // Hardcoded Channel ID (replace this with your actual Channel ID)
+  const channelId = '1360078467684634715';
+
   // Update channel name every 60 seconds
   setInterval(async () => {
     try {
-      const channel = await client.channels.fetch(process.env.CHANNEL_ID);
+      const channel = await client.channels.fetch(channelId);
+      if (!channel) {
+        throw new Error('Channel not found');
+      }
+
       const time = new Date().toLocaleTimeString();
       await channel.setName(`Time: ${time}`);
       console.log(`Channel name updated to: Time: ${time}`);
