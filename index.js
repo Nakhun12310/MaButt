@@ -37,7 +37,7 @@ client.once('ready', () => {
   }, 60000); // every minute
 });
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.TOKEN);
 
 // Start the Express web server
 app.listen(PORT, () => {
