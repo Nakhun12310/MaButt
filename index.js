@@ -15,7 +15,7 @@ client.once('ready', () => {
             await channel.setName(`Time: ${time}`);
             console.log(`Updated channel name to: Time: ${time}`);
         } catch (err) {
-            console.error('Failed to update channel name:', err);
+            console.error('Error updating channel name:', err);
         }
     }, 60000); // every 60 seconds
 });
